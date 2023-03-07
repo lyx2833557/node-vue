@@ -1,28 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <PanelContainer>
+    </PanelContainer> -->
+    <router-view />
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
+<script>
+// import PanelContainer from './components/PanelContainer.vue';
+// import { getTopics } from "./http/api.js";
+// import HeaderNav from "./components/HeaderNav.vue";
+export default {
+  components: {
+    // PanelContainer
+  },
+  // async created() {
+  //   const res = await getTopics({ params: { tab: "share" } });
+  //   console.log(res.data);
+  // },
+};
+</script>

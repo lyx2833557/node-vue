@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;height: 200px;background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+</body>
+<script>
+
+// // let a="lee(t(c)o)de)"
+//     function isValid(s) {
+//         const len = s.length;
+//         // 入栈判断
+//         let arr = [];
+//         // 储存
+//         let key=[];
+//         // 遍历字符串
+//         for (let i = 0; i < len; i++) {
+//             switch (s[i]) {    
+//                 case ')':
+//                     if (arr.pop() !== '(') {
+//                        arr;   
+//                     key;
+//                     }else{
+//                         arr.push(s[i])
+//                         key.push(s[i])                      
+//                     }
+//                     break;
+//                     case '(':
+//                         arr.push(s[i])
+//                     key.push(s[i])             
+//                     break;
+//                     default: key.push(s[i])
+//                         break
+//             }
+//         }
+//         return key      
+//     }  
+//   let a=isValid("lee((((t(c)o)de)")
+// //   let a=isValid("a)b(c)(d")
+//   console.log(a);
+// //   let o="l(ee(t(c)d)e)"
+
+
+let test = 'a)(b(c)d'
+    let  minRemoveToMakeValid = (s) => {
+        // 第一步 拆分成数组
+        let allArr = test.split('')
+        let isAdd = false //是否有增加一个符号
+        // 第二步 寻找中心点，如果是数组长度是偶数，则增加一个特殊符号A
+        if(allArr.length % 2 == 0){
+            allArr.unshift('AST')
+            isAdd = true
+        }
+        let midIndex = allArr.length-((allArr.length-1)/2) //mid中心点的位置
+        let mid = allArr[midIndex] //mid 就是中心点
+        // 第三步 删除中心点左侧的所有）和中心点右侧所有（并返回一个新的数组
+        let filterArr = allArr.filter((num,index) => {
+            // return (index===midIndex&&num!=='('&&num!==')');
+            return(index<midIndex&&num!==')')||(index>midIndex&&num!=='(')||index===midIndex
+        });
+        // 第四部 判断左右两边括号数是否相等如果不相等，则在对应位置增加对应的括号数
+        let leftNumber = 0 // ( 的数量
+        let rightNumber = 0 // ) 的数量
+        
+        for (let item of filterArr) {
+            if (item === '(') leftNumber++
+            if (item === ')') rightNumber++
+        }
+        let addNum = 0 //已增加的
+        let searchIndex = 0 // 左右不相等时的位置索引
+        let didArr = JSON.parse(JSON.stringify(filterArr)) //克隆数组，防止循环错乱
+        console.log(filterArr)
+        //如果左右相等则直接跳出即可
+        if (leftNumber === rightNumber) {
+        } 
+        //如果左右不相等，则在对应的方向增加括号
+        if (leftNumber>rightNumber) {
+            for (let index=didArr.length;index>0;index--) {
+                if (didArr[index]==='(') {
+                    searchIndex++
+                    if (searchIndex>(rightNumber)){
+                        filterArr.splice(index-addNum, 1);
+                        addNum++
+                    }
+                }
+            }
+        }
+        if (leftNumber<rightNumber) {
+            for (let index=0;index<didArr.length;index++) {
+                if (didArr[index]===')') {
+                    searchIndex++
+                    if (searchIndex>(leftNumber)){
+                        filterArr.splice(index-addNum, 1);
+                        addNum++
+                    }
+                }
+                
+            }
+        }
+        if (isAdd===true) {
+            let index = filterArr.indexOf('AST')
+            filterArr.splice(index,1)
+        }
+        return filterArr.join('')
+    }
+
+        console.log('minRemoveToMakeValid'+'='+minRemoveToMakeValid(test))
+</script>
+
+</html>
